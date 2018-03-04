@@ -7,6 +7,15 @@
 
 备注:
 代码里用到的TMedia和TGui类均为Debug的代码.以后应该会发上来
+-------------------------------------------------------------
+使用方法:
+Unix系统(比如Ubuntu)
+依赖包:-lalut -lglfw(其它依赖会顺带下载完)
+sudo apt-get install libalut-dev
+sudo apt-get install libglfw3-dev
+
+以上完成之后,在软件目录里运行:
+./ComputerLuckyDraw.sh
 
 -------------------------------------------------------------
 Release附带的文件授权说明:

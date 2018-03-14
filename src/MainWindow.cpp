@@ -2,11 +2,11 @@
 #include<thread>
 #include<random>
 
-void MainWindow::paintEvent()
+void MainWindow::handlemessage(TSDK::TGuiMessage * msg)
 {
     if(this->m_isRunRand)
     {
-        unsigned int num=this->m_randomNum;
+        unsigned int num=atoi(msg->value(0).c_str());
         this->m_num4->loadImageFromFile(this->getNumImg(num%10));
         num/=10;
         this->m_num3->loadImageFromFile(this->getNumImg(num%10));
@@ -145,13 +145,16 @@ void MainWindow::threadRandom()
     std::default_random_engine random;
     std::uniform_int_distribution<unsigned int> range(1,9999);
 
-    std::chrono::milliseconds sec(500);
+    std::chrono::milliseconds sec(300);
 
     while(this->m_isProgramRun)
     {
         if(this->m_isRunRand)
         {
-            this->m_randomNum=range(random);
+            TSDK::TGuiMessage msg(0,1);
+            msg.setValue(std::to_string(range(random)),0);
+            this->sendMessage(&msg);
+            std::this_thread::sleep_for(std::chrono::milliseconds(100));
         }
         else
             std::this_thread::sleep_for(sec);

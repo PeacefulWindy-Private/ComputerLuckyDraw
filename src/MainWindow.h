@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include<TWindow.h>
-#include<TPictureBox2D.h>
+#include<TPictureBox.h>
 #include<TImageButton.h>
 #include<memory>
 #include<TAudio.h>
@@ -10,7 +10,7 @@
 class MainWindow : public TSDK::TWindow
 {
 protected:
-    void paintEvent();
+    void handlemessage(TSDK::TGuiMessage * msg);
 private:
     const char * getNumImg(int i);
 private:
@@ -29,7 +29,6 @@ private:
     void initializeNum();
 private:
     std::unique_ptr<std::thread> m_th;
-    unsigned int m_randomNum=0;
     bool m_isRunRand=false;
 public:
     void threadRandom();
